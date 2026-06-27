@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Geist, Inter, Space_Grotesk } from 'next/font/google';
+
+import { cn } from '@/lib/utils';
 
 import './globals.css';
 import './tailwind.config.css';
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const fontInter = Inter({
   variable: '--font-inter',
@@ -26,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn('font-sans', geist.variable)}>
       <body className={`${fontInter.variable} ${fontSpaceGrotesk.variable} antialiased`}>
         {children}
       </body>
