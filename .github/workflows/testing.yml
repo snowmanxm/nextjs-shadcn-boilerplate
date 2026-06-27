@@ -1,0 +1,39 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+env:
+  NODE_OPTIONS: '--max_old_space_size=8192'
+  DOPPLER_PROJECT_NAME: ${{ secrets.DOPPLER_PROJECT_NAME }}
+  DOPPLER_CONFIG_NAME: ${{ secrets.DOPPLER_CONFIG_NAME }}
+  DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: node:iron-alpine
+    defaults:
+      run:
+        working-directory: ./
+
+    steps:
+      - name: Install Python3, Git
+        run: apk add --no-cache gnupg python3 git && ln -sf python3 /usr/bin/python
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Run lint
+        run: doppler run --project "$DOPPLER_PROJECT_NAME" --config "$DOPPLER_CONFIG_NAME" -- yarn web:lint
+
+      - name: Run build
+        run: doppler run --project "$DOPPLER_PROJECT_NAME" --config "$DOPPLER_CONFIG_NAME" -- yarn web:build

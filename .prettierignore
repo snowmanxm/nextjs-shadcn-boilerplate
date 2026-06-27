@@ -1,0 +1,40 @@
+# Dependencies
+node_modules
+node_modules/**
+.pnp.js
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Cache
+.cache
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Logs
+*.log
+
+# Lock files
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+coverage
+*.swp
+*.swo

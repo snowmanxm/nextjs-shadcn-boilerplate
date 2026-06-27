@@ -1,0 +1,52 @@
+{
+  "name": "cb-admin-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3500}",
+    "format": "prettier --write \"**/*.(js|mjs|cjs|jsx|ts|tsx|vue|css|scss|sass|html|json|json5|jsonc|yml|yaml|md|markdown|graphql|gql|ng)\"",
+    "format:check": "prettier --check \"**/*.(js|mjs|cjs|jsx|ts|tsx|vue|css|scss|sass|html|json|json5|jsonc|yml|yaml|md|markdown|graphql|gql|ng)\"",
+    "lint": "eslint src --max-warnings=0",
+    "pre-commit": "lint-staged --no-stash",
+    "prepare": "husky",
+    "rules:sync": "python3 scripts/sync-agent-rules.py"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "next": "16.0.7",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "tailwind-merge": "^3.4.0",
+    "url-join": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "lint-staged": {
+    "**/*.{js,mjs,cjs,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "**/*.{json,json5,jsonc,yml,yaml,md,markdown,graphql,gql,ng,sql,prisma}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "yarn": ">=1.22.0"
+  },
+  "packageManager": "yarn@1.22.22"
+}

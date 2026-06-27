@@ -1,0 +1,61 @@
+# Development files
+node_modules
+.git
+.gitignore
+.env*
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Mobile workspace (excluded entirely)
+mobile/
+
+# Documentation and configs
+docs/
+README.md
+*.md
+.prettierrc.js
+.prettierignore
+.eslintrc*
+.nvmrc
+
+# Testing files
+**/*.test.*
+**/*.spec.*
+**/__tests__/
+coverage/
+jest.config.js
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+*.sublime*
+.editorconfig
+
+# CI/CD
+.github/
+.husky/
+
+# Build artifacts
+.next/
+web/.next/cache
+dist/
+build/
+
+# Other
+LICENSE
+.yarnrc.yml
+deployment/
+
+.cursor/rules/
+AGENTS.md
+CLAUDE.md
+CLINE.md
+CODEX.md
+
+# Always include AI rule files in build context
+!.ai/
+!.ai/**
