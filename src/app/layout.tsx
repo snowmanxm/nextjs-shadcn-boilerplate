@@ -3,6 +3,8 @@ import { Geist, Inter, Space_Grotesk } from 'next/font/google';
 
 import { cn } from '@/lib/utils';
 
+import { Providers } from './providers';
+
 import './globals.css';
 import './tailwind.config.css';
 
@@ -32,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn('font-sans', geist.variable)}>
       <body className={`${fontInter.variable} ${fontSpaceGrotesk.variable} antialiased`}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
