@@ -2,26 +2,56 @@
 
 import {
   BellIcon,
+  CalendarDaysIcon,
   CheckCircle2Icon,
   ChevronDownIcon,
+  CreditCardIcon,
   Layers3Icon,
+  MailIcon,
   PanelTopIcon,
+  SearchIcon,
   Settings2Icon,
   ShieldCheckIcon,
   SparklesIcon,
   Table2Icon,
 } from 'lucide-react';
-import { useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { toast } from 'sonner';
 
 import { DebouncedInput, NativeSelect, TableActions, TablePaginator } from '@/components/shared';
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Alert,
   AlertAction,
   AlertDescription,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogMedia,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   AlertTitle,
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
   Badge,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
   Button,
+  Calendar,
   Card,
   CardAction,
   CardContent,
@@ -29,6 +59,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Checkbox,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandShortcut,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -44,9 +85,53 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
   Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupTextarea,
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
   Label,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+  RadioGroup,
+  RadioGroupItem,
+  ScrollArea,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Separator,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
   Skeleton,
+  Switch,
   Table,
   TableBody,
   TableCell,
@@ -57,6 +142,11 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@/components/ui';
 
 const sections = [
@@ -65,6 +155,7 @@ const sections = [
   'Forms',
   'Tables',
   'Navigation',
+  'Overlays',
   'Feedback',
   'Data layer',
 ];
@@ -75,6 +166,8 @@ const workflowRows = [
   { name: 'Security export', owner: 'Trust', status: 'Queued' },
 ];
 
+const commandItems = ['Create record', 'Open settings', 'Run export'];
+
 export function ComponentUseCases() {
   const [selectValue, setSelectValue] = useState('weekly');
   const [debouncedValue, setDebouncedValue] = useState('starter');
@@ -84,328 +177,574 @@ export function ComponentUseCases() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
-      <section className="mx-auto flex max-w-7xl flex-col gap-16 px-6 py-10 md:px-10 md:py-14">
-        <Hero />
+      <TooltipProvider>
+        <section className="mx-auto flex max-w-7xl flex-col gap-16 px-6 py-10 md:px-10 md:py-14">
+          <Hero />
 
-        <ShowcaseSection
-          eyebrow="Foundation"
-          title="Layout, cards, and status language"
-          description="Use cards sparingly for interactive surfaces, keep section copy operational, and use badges for state rather than decoration."
-        >
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <ShowcaseSection
+            eyebrow="Foundation"
+            title="Layout, hierarchy, cards, avatars, and path context"
+            description="Use structure first: breadcrumbs for orientation, cards for bounded tasks, avatars for people or ownership, and separators for quiet grouping."
+          >
+            <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Workspace card</CardTitle>
+                  <CardDescription>
+                    A compact surface for summaries, scoped actions, and related state.
+                  </CardDescription>
+                  <CardAction>
+                    <Badge>Ready</Badge>
+                  </CardAction>
+                </CardHeader>
+                <CardContent className="grid gap-5">
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">App</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Workflows</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Import</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                  <Separator />
+                  <div className="flex items-center justify-between gap-4">
+                    <AvatarGroup>
+                      <Avatar>
+                        <AvatarFallback>OP</AvatarFallback>
+                        <AvatarBadge />
+                      </Avatar>
+                      <Avatar>
+                        <AvatarFallback>DS</AvatarFallback>
+                      </Avatar>
+                      <AvatarGroupCount>+3</AvatarGroupCount>
+                    </AvatarGroup>
+                    <Badge variant="secondary">Owned by Operations</Badge>
+                  </div>
+                </CardContent>
+                <CardFooter className="justify-between text-sm text-muted-foreground">
+                  <span>Use for bounded tasks</span>
+                  <span>Updated now</span>
+                </CardFooter>
+              </Card>
+
+              <Card className="border-gray-200 bg-white/75">
+                <CardHeader>
+                  <CardTitle>Section rhythm</CardTitle>
+                  <CardDescription>Every showcase block has one job.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ScrollArea className="h-72 pr-3">
+                    <div className="space-y-4">
+                      {sections.map((section, index) => (
+                        <div key={section} className="flex items-center gap-3">
+                          <span className="grid size-8 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                            {index + 1}
+                          </span>
+                          <span className="text-sm font-medium">{section}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
+            </div>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Actions"
+            title="Buttons, badges, tooltips, and confirmation"
+            description="Pair one primary action with quieter secondary actions. Explain destructive or privileged actions before they happen."
+          >
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="flex flex-wrap items-center gap-3 rounded-[28px] border border-gray-200 bg-white/75 p-5">
+                <Tooltip>
+                  <TooltipTrigger render={<Button />}>Save changes</TooltipTrigger>
+                  <TooltipContent>Primary action for this surface.</TooltipContent>
+                </Tooltip>
+                <Button variant="secondary">Preview</Button>
+                <Button variant="outline">Cancel</Button>
+                <Button variant="ghost">Reset</Button>
+                <AlertDialog>
+                  <AlertDialogTrigger render={<Button variant="destructive" />}>
+                    Delete
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogMedia>
+                        <ShieldCheckIcon />
+                      </AlertDialogMedia>
+                      <AlertDialogTitle>Delete this item?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Use alert dialogs when an action is destructive or difficult to undo.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction>Confirm</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 rounded-[28px] border border-gray-200 bg-white/75 p-5">
+                <Badge>Active</Badge>
+                <Badge variant="secondary">Draft</Badge>
+                <Badge variant="outline">Review</Badge>
+                <Badge variant="destructive">Blocked</Badge>
+                <Badge variant="ghost">Muted</Badge>
+              </div>
+            </div>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Forms"
+            title="Inputs, groups, choices, text areas, OTP, and debounced search"
+            description="Prefer composed form primitives from `components/ui` and reusable controls from `components/shared` before feature-local variants."
+          >
+            <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Create record</CardTitle>
+                  <CardDescription>
+                    Inputs, select, checkbox, switch, and radio group.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="showcase-name">Name</Label>
+                    <Input id="showcase-name" placeholder="Acme workspace" />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="showcase-cadence">Cadence</Label>
+                    <NativeSelect
+                      id="showcase-cadence"
+                      className="w-full"
+                      value={selectValue}
+                      onChange={setSelectValue}
+                      options={[
+                        { label: 'Daily', value: 'daily' },
+                        { label: 'Weekly', value: 'weekly' },
+                        { label: 'Monthly', value: 'monthly' },
+                      ]}
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="showcase-notes">Notes</Label>
+                    <Textarea id="showcase-notes" placeholder="Explain the workflow..." />
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <label className="flex items-center gap-2 text-sm">
+                      <Checkbox defaultChecked /> Include sample data
+                    </label>
+                    <label className="flex items-center gap-2 text-sm">
+                      <Switch defaultChecked /> Notify team
+                    </label>
+                  </div>
+                  <RadioGroup defaultValue="standard">
+                    <label className="flex items-center gap-2 text-sm">
+                      <RadioGroupItem value="standard" /> Standard flow
+                    </label>
+                    <label className="flex items-center gap-2 text-sm">
+                      <RadioGroupItem value="guarded" /> Guarded flow
+                    </label>
+                  </RadioGroup>
+                </CardContent>
+              </Card>
+
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Advanced inputs</CardTitle>
+                  <CardDescription>
+                    Grouped controls, OTP entry, and debounced search behavior.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <MailIcon />
+                    </InputGroupAddon>
+                    <InputGroupInput placeholder="email@example.com" />
+                    <InputGroupButton>Invite</InputGroupButton>
+                  </InputGroup>
+                  <InputGroup>
+                    <InputGroupTextarea placeholder="Grouped textarea for compact comments" />
+                    <InputGroupAddon align="block-end">Markdown supported</InputGroupAddon>
+                  </InputGroup>
+                  <InputOTP maxLength={6} defaultValue="123">
+                    <InputOTPGroup>
+                      {Array.from({ length: 6 }).map((_, index) => (
+                        <InputOTPSlot key={index} index={index} />
+                      ))}
+                    </InputOTPGroup>
+                  </InputOTP>
+                  <div className="grid gap-2">
+                    <Label htmlFor="showcase-debounced">Debounced search</Label>
+                    <DebouncedInput
+                      id="showcase-debounced"
+                      value={debouncedValue}
+                      onDebouncedChange={setDebouncedValue}
+                      placeholder="Type and pause"
+                    />
+                  </div>
+                  <div className="rounded-2xl bg-muted px-4 py-3 text-sm text-muted-foreground">
+                    Current debounced value:{' '}
+                    <span className="font-medium text-foreground">{debouncedValue}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Tables"
+            title="Data tables, loading rows, and pagination"
+            description="Tables should make scanning easy, keep controls close, and preserve pagination/search state in the feature implementation."
+          >
             <Card className="border-gray-200 bg-white/85">
               <CardHeader>
-                <CardTitle>Workspace card</CardTitle>
+                <CardTitle>Operational table</CardTitle>
                 <CardDescription>
-                  A compact surface for summaries, scoped actions, and related state.
+                  Combine table primitives with shared controls for list-heavy product screens.
                 </CardDescription>
                 <CardAction>
-                  <Badge>Ready</Badge>
+                  <TableActions
+                    isLoading={false}
+                    search={search}
+                    searchPlaceholder="Search workflows"
+                    onSearchChange={setSearch}
+                    onRefresh={async () => {
+                      toast.success('Refresh action triggered.');
+                    }}
+                  />
                 </CardAction>
               </CardHeader>
               <CardContent>
-                <div className="grid gap-3 sm:grid-cols-3">
-                  {['Readable', 'Typed', 'Responsive'].map((item) => (
-                    <div key={item} className="rounded-2xl bg-muted px-4 py-3 text-sm font-medium">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="justify-between text-sm text-muted-foreground">
-                <span>Use for bounded tasks</span>
-                <span>Updated now</span>
-              </CardFooter>
-            </Card>
-
-            <div className="rounded-[28px] border border-gray-200 bg-white/70 p-5">
-              <p className="text-sm font-semibold">Section rhythm</p>
-              <div className="mt-5 space-y-4">
-                {sections.map((section, index) => (
-                  <div key={section} className="flex items-center gap-3">
-                    <span className="grid size-8 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                      {index + 1}
-                    </span>
-                    <span className="text-sm font-medium">{section}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </ShowcaseSection>
-
-        <ShowcaseSection
-          eyebrow="Actions"
-          title="Buttons and badges for clear intent"
-          description="Pair one primary action with quieter secondary actions. Use status badges to clarify state without overloading color."
-        >
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="flex flex-wrap items-center gap-3 rounded-[28px] border border-gray-200 bg-white/75 p-5">
-              <Button>Save changes</Button>
-              <Button variant="secondary">Preview</Button>
-              <Button variant="outline">Cancel</Button>
-              <Button variant="ghost">Reset</Button>
-              <Button variant="destructive">Delete</Button>
-            </div>
-            <div className="flex flex-wrap items-center gap-3 rounded-[28px] border border-gray-200 bg-white/75 p-5">
-              <Badge>Active</Badge>
-              <Badge variant="secondary">Draft</Badge>
-              <Badge variant="outline">Review</Badge>
-              <Badge variant="destructive">Blocked</Badge>
-              <Badge variant="ghost">Muted</Badge>
-            </div>
-          </div>
-        </ShowcaseSection>
-
-        <ShowcaseSection
-          eyebrow="Forms"
-          title="Inputs, labels, selects, and debounced search"
-          description="Keep form rows explicit: label the control, describe the behavior, and disable submit paths while work is pending."
-        >
-          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <Card className="border-gray-200 bg-white/85">
-              <CardHeader>
-                <CardTitle>Create record</CardTitle>
-                <CardDescription>Simple form composition with accessible labels.</CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="showcase-name">Name</Label>
-                  <Input id="showcase-name" placeholder="Acme workspace" />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="showcase-cadence">Cadence</Label>
-                  <NativeSelect
-                    id="showcase-cadence"
-                    className="w-full"
-                    value={selectValue}
-                    onChange={setSelectValue}
-                    options={[
-                      { label: 'Daily', value: 'daily' },
-                      { label: 'Weekly', value: 'weekly' },
-                      { label: 'Monthly', value: 'monthly' },
-                    ]}
-                  />
-                </div>
-                <Button>Submit example</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-gray-200 bg-white/85">
-              <CardHeader>
-                <CardTitle>Debounced input</CardTitle>
-                <CardDescription>
-                  Useful for search fields that should wait before updating the URL or fetching.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="showcase-debounced">Search query</Label>
-                  <DebouncedInput
-                    id="showcase-debounced"
-                    value={debouncedValue}
-                    onDebouncedChange={setDebouncedValue}
-                    placeholder="Type and pause"
-                  />
-                </div>
-                <div className="rounded-2xl bg-muted px-4 py-3 text-sm text-muted-foreground">
-                  Current debounced value:{' '}
-                  <span className="font-medium text-foreground">{debouncedValue}</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </ShowcaseSection>
-
-        <ShowcaseSection
-          eyebrow="Tables"
-          title="Data tables, loading rows, and pagination"
-          description="Tables should make scanning easy, keep controls close, and preserve pagination/search state in the feature implementation."
-        >
-          <Card className="border-gray-200 bg-white/85">
-            <CardHeader>
-              <CardTitle>Operational table</CardTitle>
-              <CardDescription>
-                Combine table primitives with shared controls for list-heavy product screens.
-              </CardDescription>
-              <CardAction>
-                <TableActions
-                  isLoading={false}
-                  search={search}
-                  searchPlaceholder="Search workflows"
-                  onSearchChange={setSearch}
-                  onRefresh={async () => {
-                    toast.success('Refresh action triggered.');
-                  }}
-                />
-              </CardAction>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Workflow</TableHead>
-                    <TableHead>Owner</TableHead>
-                    <TableHead>Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {workflowRows.map((row) => (
-                    <TableRow key={row.name}>
-                      <TableCell className="font-medium">{row.name}</TableCell>
-                      <TableCell>{row.owner}</TableCell>
-                      <TableCell>
-                        <Badge variant={row.status === 'Ready' ? 'default' : 'secondary'}>
-                          {row.status}
-                        </Badge>
-                      </TableCell>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Workflow</TableHead>
+                      <TableHead>Owner</TableHead>
+                      <TableHead>Status</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-              <TablePaginator
-                limit={limit}
-                page={page}
-                total={38}
-                visibleCount={workflowRows.length}
-                onLimitChange={(nextLimit) => {
-                  setLimit(nextLimit);
-                  setPage(1);
-                }}
-                onPageChange={setPage}
+                  </TableHeader>
+                  <TableBody>
+                    {workflowRows.map((row) => (
+                      <TableRow key={row.name}>
+                        <TableCell className="font-medium">{row.name}</TableCell>
+                        <TableCell>{row.owner}</TableCell>
+                        <TableCell>
+                          <Badge variant={row.status === 'Ready' ? 'default' : 'secondary'}>
+                            {row.status}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                <TablePaginator
+                  limit={limit}
+                  page={page}
+                  total={38}
+                  visibleCount={workflowRows.length}
+                  onLimitChange={(nextLimit) => {
+                    setLimit(nextLimit);
+                    setPage(1);
+                  }}
+                  onPageChange={setPage}
+                />
+                <Separator className="my-5" />
+                <Pagination>
+                  <PaginationContent>
+                    <PaginationItem>
+                      <PaginationPrevious href="#" />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#" isActive>
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext href="#" />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </CardContent>
+            </Card>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Navigation"
+            title="Tabs, accordion, collapsible, command, and menus"
+            description="Use tabs for parallel views, accordion/collapsible for progressive disclosure, and command/menu primitives for action discovery."
+          >
+            <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Tabbed detail panel</CardTitle>
+                  <CardDescription>Keep related views in one task area.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Tabs defaultValue="overview">
+                    <TabsList>
+                      <TabsTrigger value="overview">Overview</TabsTrigger>
+                      <TabsTrigger value="settings">Settings</TabsTrigger>
+                      <TabsTrigger value="activity">Activity</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="overview" className="pt-4">
+                      Summary content, health checks, and current state.
+                    </TabsContent>
+                    <TabsContent value="settings" className="pt-4">
+                      Configuration controls and guarded mutations.
+                    </TabsContent>
+                    <TabsContent value="activity" className="pt-4">
+                      Recent events, audit entries, and background work.
+                    </TabsContent>
+                  </Tabs>
+                  <Accordion className="mt-6">
+                    <AccordionItem value="contracts">
+                      <AccordionTrigger>When should I use shared controls?</AccordionTrigger>
+                      <AccordionContent>
+                        Use `components/shared` for repeated table, search, and select behavior
+                        before introducing a feature-local implementation.
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </CardContent>
+              </Card>
+
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Command and menu actions</CardTitle>
+                  <CardDescription>Compact action discovery for dense surfaces.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <Command className="border border-gray-200">
+                    <CommandInput placeholder="Search commands..." />
+                    <CommandList>
+                      <CommandEmpty>No command found.</CommandEmpty>
+                      <CommandGroup heading="Suggestions">
+                        {commandItems.map((item) => (
+                          <CommandItem key={item}>
+                            <SearchIcon />
+                            {item}
+                            <CommandShortcut>⌘K</CommandShortcut>
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                  <Collapsible defaultOpen>
+                    <CollapsibleTrigger render={<Button variant="outline" />}>
+                      Toggle implementation note
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="mt-3 rounded-2xl bg-muted p-4 text-sm text-muted-foreground">
+                      Collapsible is for inline disclosure when a dialog or sheet would be too
+                      heavy.
+                    </CollapsibleContent>
+                  </Collapsible>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger render={<Button variant="outline" />}>
+                      Actions
+                      <ChevronDownIcon />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>Record actions</DropdownMenuLabel>
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem>
+                          Duplicate
+                          <DropdownMenuShortcut>D</DropdownMenuShortcut>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>Archive</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </CardContent>
+              </Card>
+            </div>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Overlays"
+            title="Dialog, sheet, popover, hover card, calendar, and select"
+            description="Use overlays for scoped decisions and contextual tools without losing page context."
+          >
+            <div className="grid gap-6 lg:grid-cols-3">
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Dialogs and sheets</CardTitle>
+                  <CardDescription>Modal decisions and side panels.</CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-3">
+                  <Dialog>
+                    <DialogTrigger render={<Button />}>Open dialog</DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Confirm component pattern</DialogTitle>
+                        <DialogDescription>
+                          Dialogs are best for short decisions where the user should stay in
+                          context.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter showCloseButton>
+                        <Button>Continue</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                  <Sheet>
+                    <SheetTrigger render={<Button variant="outline" />}>Open sheet</SheetTrigger>
+                    <SheetContent>
+                      <SheetHeader>
+                        <SheetTitle>Inspector panel</SheetTitle>
+                        <SheetDescription>
+                          Sheets are useful for secondary context, filters, or edit panels.
+                        </SheetDescription>
+                      </SheetHeader>
+                      <SheetFooter>
+                        <Button>Apply</Button>
+                      </SheetFooter>
+                    </SheetContent>
+                  </Sheet>
+                </CardContent>
+              </Card>
+
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Contextual overlays</CardTitle>
+                  <CardDescription>Popover and hover card primitives.</CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-3">
+                  <Popover>
+                    <PopoverTrigger render={<Button variant="outline" />}>
+                      Open popover
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverHeader>
+                        <PopoverTitle>Filter scope</PopoverTitle>
+                        <PopoverDescription>
+                          Keep popovers short and focused on the trigger.
+                        </PopoverDescription>
+                      </PopoverHeader>
+                    </PopoverContent>
+                  </Popover>
+                  <HoverCard>
+                    <HoverCardTrigger render={<Button variant="ghost" />}>
+                      Hover details
+                    </HoverCardTrigger>
+                    <HoverCardContent>
+                      <p className="font-medium">Usage note</p>
+                      <p className="mt-2 text-muted-foreground">
+                        Hover cards work best for previewing nearby metadata.
+                      </p>
+                    </HoverCardContent>
+                  </HoverCard>
+                </CardContent>
+              </Card>
+
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Calendar and select</CardTitle>
+                  <CardDescription>Date and option picking primitives.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                  <Select defaultValue="north">
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Region" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="north">North region</SelectItem>
+                      <SelectItem value="south">South region</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Calendar mode="single" selected={new Date(2026, 6, 1)} />
+                </CardContent>
+              </Card>
+            </div>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Feedback"
+            title="Alerts, skeletons, progress, and toasts"
+            description="Make async states visible: tell users what happened, what is loading, and what they can do next."
+          >
+            <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+              <div className="grid gap-4">
+                <Alert>
+                  <CheckCircle2Icon />
+                  <AlertTitle>Changes saved</AlertTitle>
+                  <AlertDescription>
+                    Use alerts for persistent page-level state that should remain visible.
+                  </AlertDescription>
+                  <AlertAction>
+                    <Badge variant="secondary">Info</Badge>
+                  </AlertAction>
+                </Alert>
+                <Alert variant="destructive">
+                  <ShieldCheckIcon />
+                  <AlertTitle>Action needs review</AlertTitle>
+                  <AlertDescription>
+                    Destructive alerts should explain the blocked action without exposing internals.
+                  </AlertDescription>
+                </Alert>
+                <Progress value={68}>
+                  <ProgressLabel>Migration coverage</ProgressLabel>
+                  <ProgressValue />
+                </Progress>
+              </div>
+              <Card className="border-gray-200 bg-white/85">
+                <CardHeader>
+                  <CardTitle>Loading and toast states</CardTitle>
+                  <CardDescription>
+                    Use skeletons before content shape is available.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-4 w-2/3" />
+                  <Button
+                    className="mt-2"
+                    variant="outline"
+                    onClick={() => toast.success('Toast feedback is wired through providers.')}
+                  >
+                    Trigger toast
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </ShowcaseSection>
+
+          <ShowcaseSection
+            eyebrow="Data layer"
+            title="API, config, providers, and query defaults"
+            description="The skeleton includes a generic API request wrapper, global feedback events, typed environment access, and React Query defaults."
+          >
+            <div className="grid gap-4 md:grid-cols-4">
+              <FoundationTile icon={PanelTopIcon} title="Providers" text="Wrap app UI once." />
+              <FoundationTile
+                icon={Settings2Icon}
+                title="Config"
+                text="Fail fast on missing env."
               />
-            </CardContent>
-          </Card>
-        </ShowcaseSection>
-
-        <ShowcaseSection
-          eyebrow="Navigation"
-          title="Tabs, dropdowns, and dialogs"
-          description="Use overlays for scoped decisions, menus for secondary actions, and tabs when switching context inside one surface."
-        >
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <Card className="border-gray-200 bg-white/85">
-              <CardHeader>
-                <CardTitle>Tabbed detail panel</CardTitle>
-                <CardDescription>Keep related views in one task area.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Tabs defaultValue="overview">
-                  <TabsList>
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="settings">Settings</TabsTrigger>
-                    <TabsTrigger value="activity">Activity</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="overview" className="pt-4">
-                    Summary content, health checks, and current state.
-                  </TabsContent>
-                  <TabsContent value="settings" className="pt-4">
-                    Configuration controls and guarded mutations.
-                  </TabsContent>
-                  <TabsContent value="activity" className="pt-4">
-                    Recent events, audit entries, and background work.
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
-
-            <div className="grid gap-4 rounded-[28px] border border-gray-200 bg-white/75 p-5">
-              <DropdownMenu>
-                <DropdownMenuTrigger render={<Button variant="outline" />}>
-                  Actions
-                  <ChevronDownIcon />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Record actions</DropdownMenuLabel>
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      Duplicate
-                      <DropdownMenuShortcut>D</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>Archive</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <Dialog>
-                <DialogTrigger render={<Button />}>Open dialog</DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Confirm component pattern</DialogTitle>
-                    <DialogDescription>
-                      Dialogs are best for short decisions where the user should stay in context.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter showCloseButton>
-                    <Button>Continue</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+              <FoundationTile icon={BellIcon} title="Events" text="Centralize API feedback." />
+              <FoundationTile icon={Table2Icon} title="Queries" text="Stable data defaults." />
             </div>
-          </div>
-        </ShowcaseSection>
-
-        <ShowcaseSection
-          eyebrow="Feedback"
-          title="Alerts, skeletons, and toasts"
-          description="Make async states visible: tell users what happened, what is loading, and what they can do next."
-        >
-          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="grid gap-4">
-              <Alert>
-                <CheckCircle2Icon />
-                <AlertTitle>Changes saved</AlertTitle>
-                <AlertDescription>
-                  Use alerts for persistent page-level state that should remain visible.
-                </AlertDescription>
-                <AlertAction>
-                  <Badge variant="secondary">Info</Badge>
-                </AlertAction>
-              </Alert>
-              <Alert variant="destructive">
-                <ShieldCheckIcon />
-                <AlertTitle>Action needs review</AlertTitle>
-                <AlertDescription>
-                  Destructive alerts should explain the blocked action without exposing internals.
-                </AlertDescription>
-              </Alert>
-            </div>
-            <Card className="border-gray-200 bg-white/85">
-              <CardHeader>
-                <CardTitle>Loading and toast states</CardTitle>
-                <CardDescription>Use skeletons before content shape is available.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-5/6" />
-                <Skeleton className="h-4 w-2/3" />
-                <Button
-                  className="mt-2"
-                  variant="outline"
-                  onClick={() => toast.success('Toast feedback is wired through providers.')}
-                >
-                  Trigger toast
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </ShowcaseSection>
-
-        <ShowcaseSection
-          eyebrow="Data layer"
-          title="API, config, providers, and query defaults"
-          description="The skeleton includes a generic API request wrapper, global feedback events, typed environment access, and React Query defaults."
-        >
-          <div className="grid gap-4 md:grid-cols-4">
-            <FoundationTile icon={PanelTopIcon} title="Providers" text="Wrap app UI once." />
-            <FoundationTile icon={Settings2Icon} title="Config" text="Fail fast on missing env." />
-            <FoundationTile icon={BellIcon} title="Events" text="Centralize API feedback." />
-            <FoundationTile icon={Table2Icon} title="Queries" text="Stable data defaults." />
-          </div>
-        </ShowcaseSection>
-      </section>
+          </ShowcaseSection>
+        </section>
+      </TooltipProvider>
     </main>
   );
 }
@@ -421,8 +760,8 @@ function Hero() {
           Every skeleton primitive, shown in working context.
         </h1>
         <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground md:text-lg">
-          Use this homepage as the living reference for layout, forms, tables, navigation, feedback,
-          and data foundations before adding product modules.
+          Use this homepage as the living reference for layout, forms, tables, navigation, overlays,
+          feedback, and data foundations before adding product modules.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button size="lg">Start a surface</Button>
@@ -438,7 +777,7 @@ function Hero() {
           <div className="flex items-center justify-between border-b border-gray-200 pb-4">
             <div>
               <p className="text-sm font-semibold">Skeleton workspace</p>
-              <p className="mt-1 text-sm text-muted-foreground">Sectioned component reference</p>
+              <p className="mt-1 text-sm text-muted-foreground">Full primitive reference</p>
             </div>
             <Badge>Ready</Badge>
           </div>
@@ -446,8 +785,8 @@ function Hero() {
             {[
               { icon: Layers3Icon, label: 'Composable UI' },
               { icon: SparklesIcon, label: 'Clean feedback' },
-              { icon: Table2Icon, label: 'List workflows' },
-              { icon: Settings2Icon, label: 'Data foundation' },
+              { icon: CalendarDaysIcon, label: 'Rich inputs' },
+              { icon: CreditCardIcon, label: 'Operational data' },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="rounded-2xl bg-muted p-4">
                 <Icon className="size-5 text-primary" />
@@ -468,7 +807,7 @@ function ShowcaseSection({
   eyebrow,
   title,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   description: string;
   eyebrow: string;
   title: string;

@@ -3,7 +3,7 @@
 import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
 import { type VariantProps, cva } from 'class-variance-authority';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 
 function Tabs({ className, orientation = 'horizontal', ...props }: TabsPrimitive.Root.Props) {
   return (

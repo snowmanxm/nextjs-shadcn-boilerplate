@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Inter, Space_Grotesk } from 'next/font/google';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 
 import { Providers } from './providers';
 

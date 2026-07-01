@@ -1,7 +1,7 @@
 import axios, { AxiosError, type AxiosRequestConfig } from 'axios';
 
 import { getApiBaseUrl } from '@/config';
-import { extractPayloadMessage } from '@/lib';
+import { extractPayloadMessage } from '@/utils';
 
 import { apiErrorEvents } from './api-error-events';
 import { apiMessageEvents } from './api-message-events';

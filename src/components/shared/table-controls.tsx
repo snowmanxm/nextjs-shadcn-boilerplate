@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Button, Input, Label, Skeleton, TableCell, TableHead, TableRow } from '@/components/ui';
-import { cn } from '@/lib';
+import { cn } from '@/utils';
 
 import { NativeSelect } from './native-select';
 

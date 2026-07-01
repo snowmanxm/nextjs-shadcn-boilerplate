@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 
 import { apiErrorEvents, apiMessageEvents, createQueryClient } from '@/api';
 import { Toaster } from '@/components/ui';
-import { extractErrorMessage } from '@/lib';
+import { extractErrorMessage } from '@/utils';
 
 export function Providers({ children }: PropsWithChildren) {
   const [queryClient] = useState(() => createQueryClient());

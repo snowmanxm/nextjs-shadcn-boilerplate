@@ -31,12 +31,13 @@ Applies to: `src/**/*.ts`, `src/**/*.tsx`
 
 - MUST use Tailwind utility classes consistent with the current light theme tokens.
 - MUST place generated shadcn components under `src/components/ui`.
-- MUST use existing primitives from `src/components/ui` for dialogs, dropdowns, selects, tables, toasts, tabs, skeletons, badges, buttons, inputs, labels, cards, and alerts.
+- MUST use existing primitives from `src/components/ui` before creating new UI building blocks. Current primitives include accordion, alert, alert dialog, avatar, badge, breadcrumb, button, calendar, card, checkbox, collapsible, command, dialog, dropdown menu, hover card, input, input group, input OTP, label, pagination, popover, progress, radio group, scroll area, select, separator, sheet, skeleton, sonner/toaster, switch, table, tabs, textarea, and tooltip.
 - MUST NOT import native browser controls, Base UI primitives, Radix primitives, or other low-level primitive libraries directly in feature components when an equivalent `src/components/ui` component exists.
-- MUST extend `src/components/ui` first when a shared primitive is missing; feature components should not define their own one-off button, dialog, select, table, badge, alert, or input variants.
+- MUST extend `src/components/ui` first when a shared primitive is missing; feature components should not define one-off primitive variants locally.
+- MUST export every same-folder public primitive from `src/components/ui/index.ts`.
 - MUST use reusable controls from `src/components/shared` for common table/search/select patterns before adding feature-local copies.
 - MUST avoid inline style objects unless dynamic styling cannot be expressed clearly with classes.
-- SHOULD centralize repeated class composition with `cn(...)` from `@/lib`.
+- SHOULD centralize repeated class composition with `cn(...)` from `@/utils/cn` or the `@/utils` barrel.
 
 ## Forms and validation
 

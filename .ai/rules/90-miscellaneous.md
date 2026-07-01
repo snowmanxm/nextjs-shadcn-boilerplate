@@ -5,7 +5,7 @@ Applies to: `src/**/*.ts`, `src/**/*.tsx`, `next.config.ts`, `eslint.config.mjs`
 
 ## Project structure and imports
 
-- MUST keep app code under `src/` (`src/app`, `src/components`, `src/api`, `src/config`, `src/lib`, `src/hooks`, `src/types`, `src/services`).
+- MUST keep app code under `src/` (`src/app`, `src/components`, `src/api`, `src/config`, `src/utils`, `src/hooks`, `src/types`, `src/services`).
 - MUST use the `@/*` alias for internal imports that map to `src/*`.
 - MUST NOT use `export default` except in Next.js `page.tsx` and `layout.tsx` files.
 - MUST use named exports and collect same-folder public exports in that folder's `index.ts`.
@@ -13,8 +13,9 @@ Applies to: `src/**/*.ts`, `src/**/*.tsx`, `next.config.ts`, `eslint.config.mjs`
 - MUST keep each `index.ts` limited to same-level files in its folder; do not re-export from subfolders.
 - SHOULD keep shared UI primitives in `src/components/ui` and feature-specific admin UI under `src/components/<feature>`.
 - SHOULD keep reusable composed controls in `src/components/shared`.
-- SHOULD keep generic helpers in `src/lib`, hooks in `src/hooks`, app API infrastructure in `src/api`, runtime config in `src/config`, API clients in `src/services` when they are product/domain-specific, and shared contracts in `src/types`.
-- MUST prefer existing barrels (`@/api`, `@/config`, `@/components/ui`, `@/components/shared`, `@/lib`) over deep imports across folders.
+- MUST keep `src/components/ui` focused on reusable primitive wrappers and visual variants; put multi-primitive patterns such as table controls, debounced inputs, and native-select adapters in `src/components/shared`.
+- SHOULD keep generic helpers in `src/utils`, hooks in `src/hooks`, app API infrastructure in `src/api`, runtime config in `src/config`, API clients in `src/services` when they are product/domain-specific, and shared contracts in `src/types`.
+- MUST prefer existing barrels (`@/api`, `@/config`, `@/components/ui`, `@/components/shared`, `@/utils`) over deep imports across folders.
 
 ## TypeScript and API boundaries
 
