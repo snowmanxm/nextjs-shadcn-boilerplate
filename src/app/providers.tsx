@@ -2,10 +2,9 @@
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { type PropsWithChildren, useEffect, useState } from 'react';
-import { toast } from 'sonner';
 
 import { apiErrorEvents, apiMessageEvents, createQueryClient } from '@/api';
-import { Toaster } from '@/components/ui';
+import { Toaster, toast } from '@/components/ui';
 import { extractErrorMessage } from '@/utils';
 
 export function Providers({ children }: PropsWithChildren) {

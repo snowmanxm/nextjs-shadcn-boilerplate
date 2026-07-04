@@ -16,7 +16,6 @@ import {
   Table2Icon,
 } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
-import { toast } from 'sonner';
 
 import { DebouncedInput, NativeSelect, TableActions, TablePaginator } from '@/components/shared';
 import {
@@ -147,6 +146,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
+  toast,
 } from '@/components/ui';
 
 const sections = [
@@ -339,20 +339,20 @@ export function ComponentUseCases() {
                     <Textarea id="showcase-notes" placeholder="Explain the workflow..." />
                   </div>
                   <div className="flex flex-wrap gap-4">
-                    <label className="flex items-center gap-2 text-sm">
+                    <Label className="flex items-center gap-2 text-sm">
                       <Checkbox defaultChecked /> Include sample data
-                    </label>
-                    <label className="flex items-center gap-2 text-sm">
+                    </Label>
+                    <Label className="flex items-center gap-2 text-sm">
                       <Switch defaultChecked /> Notify team
-                    </label>
+                    </Label>
                   </div>
                   <RadioGroup defaultValue="standard">
-                    <label className="flex items-center gap-2 text-sm">
+                    <Label className="flex items-center gap-2 text-sm">
                       <RadioGroupItem value="standard" /> Standard flow
-                    </label>
-                    <label className="flex items-center gap-2 text-sm">
+                    </Label>
+                    <Label className="flex items-center gap-2 text-sm">
                       <RadioGroupItem value="guarded" /> Guarded flow
-                    </label>
+                    </Label>
                   </RadioGroup>
                 </CardContent>
               </Card>

@@ -106,7 +106,7 @@ export function SortableTableHead<TSortBy extends string>({
 
   return (
     <TableHead>
-      <button
+      <Button
         type="button"
         className="inline-flex items-center gap-2 font-medium text-foreground"
         onClick={() => tableState.toggleSort(sortBy)}
@@ -115,7 +115,7 @@ export function SortableTableHead<TSortBy extends string>({
         <span className="text-[11px] text-muted-foreground">
           {isActive ? tableState.sortDir.toUpperCase() : 'Sort'}
         </span>
-      </button>
+      </Button>
     </TableHead>
   );
 }
