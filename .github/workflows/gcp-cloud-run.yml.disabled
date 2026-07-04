@@ -9,8 +9,8 @@ on:
 env:
   NODE_OPTIONS: '--max_old_space_size=8192'
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  SERVICE_BASE_NAME: 'chatchat-web'
-  SLACK_BASE_USERNAME: 'App.ChatChat.com'
+  SERVICE_BASE_NAME: 'nextjs-shadcn-boilerplate'
+  SLACK_BASE_USERNAME: 'Next.js Shadcn Boilerplate'
 
 jobs:
   deploy:
@@ -32,10 +32,10 @@ jobs:
 
           if [[ "${{ github.ref_name }}" == "main" ]]; then
             echo "DEPLOY_ENV=PRODUCTION" >> $GITHUB_ENV
-            echo "APP_URL=https://app.chatchat.com" >> $GITHUB_ENV
+            echo "APP_URL=https://nextjs-shadcn-boilerplate.com" >> $GITHUB_ENV
           else
             echo "DEPLOY_ENV=STAGING" >> $GITHUB_ENV
-            echo "APP_URL=https://stg-app.chatchat.com" >> $GITHUB_ENV
+            echo "APP_URL=https://stg-nextjs-shadcn-boilerplate.com" >> $GITHUB_ENV
           fi
 
           echo "SLACK_USERNAME=${{ env.SLACK_BASE_USERNAME }} - ${{ env.DEPLOY_ENV }}" >> $GITHUB_ENV
