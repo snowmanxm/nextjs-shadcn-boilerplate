@@ -70,11 +70,11 @@ const eslintConfig = defineConfig([
             },
             {
               name: 'sonner',
-              message: 'Use the Toast primitive from @/components/ui instead.',
+              message: 'Use the toast from @/components/ui instead.',
             },
             {
               name: 'toast',
-              message: 'Use the Toast primitive from @/components/ui instead.',
+              message: 'Use the toast from @/components/ui instead.',
             },
           ],
           patterns: [
